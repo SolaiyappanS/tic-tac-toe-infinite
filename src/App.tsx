@@ -1,5 +1,7 @@
+import MainContainer from "./container/mainContainer/MainContainer";
+
 function App() {
-  return <h1>Tic Tac Toe Infinite</h1>;
+  return <MainContainer />;
 }
 
 export default App;
