@@ -7,9 +7,9 @@ interface GameRowProps {
 const GameRow = ({ x }: GameRowProps) => {
   const columns = [0, 1, 2];
   return (
-    <div className="gameRow">
+    <div>
       {columns.map((y) => (
-        <GameCell x={x} y={y} />
+        <GameCell x={x} y={y} key={`gameCell_${x}_${y}`} />
       ))}
     </div>
   );

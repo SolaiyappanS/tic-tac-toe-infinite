@@ -1,19 +1,26 @@
+import useGameStore from "../../store/gameStore";
+import { pickCell } from "./../../services/gameControls";
+import { GameCellStyles } from "./GameCell.style";
+
 interface GameCellProps {
   x: number;
   y: number;
 }
 
 const GameCell = ({ x, y }: GameCellProps) => {
-  const pickCell = (x: number, y: number) => {
-    console.log(x, y);
-  };
+  const { gameCellValues, gameCellColors, gameCellTextShadow } = useGameStore();
 
   return (
     <div
-      id={`gameCell_${x}_${y}`}
-      className="gameCell"
       onClick={() => pickCell(x, y)}
-    ></div>
+      style={{
+        ...GameCellStyles(x, y),
+        color: gameCellColors[x][y],
+        textShadow: gameCellTextShadow[x][y],
+      }}
+    >
+      {gameCellValues[x][y] || <>&nbsp;</>}
+    </div>
   );
 };
 

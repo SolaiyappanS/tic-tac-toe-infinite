@@ -1,12 +1,21 @@
+import { refreshBoard } from "../../services/gameControls";
+import useGameStore from "../../store/gameStore";
+import { HeaderStyles, RefreshButton } from "./Header.style";
+
 const Header = () => {
-  const refreshBoard = () => {
-    console.log("refresh");
-  };
+  const { refreshBtnColor, refreshBtnOpacity } = useGameStore();
 
   return (
     <>
-      <p className="heading">Tic Tac Toe Infinite</p>
-      <p className="refreshBtn" id="refreshBtn" onClick={refreshBoard}>
+      <p style={HeaderStyles}>Tic Tac Toe Infinite</p>
+      <p
+        style={{
+          ...RefreshButton,
+          color: refreshBtnColor,
+          opacity: refreshBtnOpacity,
+        }}
+        onClick={refreshBoard}
+      >
         Refresh Game
       </p>
     </>
