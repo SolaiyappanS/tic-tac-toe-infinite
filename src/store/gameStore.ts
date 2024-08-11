@@ -19,6 +19,9 @@ interface GameStoreProps {
   gameCellValues: string[][];
   setGameCellValues: (x: number, y: number, value: string) => void;
 
+  gameCode: string;
+  setGameCode: (value: string) => void;
+
   gameWinCells: number[][];
   setGameWinCells: (c1: number[], c2: number[], c3: number[]) => void;
 
@@ -100,6 +103,9 @@ const useGameStore = create<GameStoreProps>((set) => ({
     set({ gameCellValues: tempGameCells });
   },
 
+  gameCode: "Offline",
+  setGameCode: (value: string) => set({ gameCode: value }),
+
   gameWinCells: [
     [-1, -1],
     [-1, -1],
@@ -130,7 +136,7 @@ const useGameStore = create<GameStoreProps>((set) => ({
   isXTurn: true,
   setIsXturn: (value: boolean) => set({ isXTurn: value }),
 
-  refreshBtnColor: "#fff",
+  refreshBtnColor: "#0000",
   setRefreshBtnColor: (value: string) => set({ refreshBtnColor: value }),
 
   refreshBtnOpacity: "0.3",

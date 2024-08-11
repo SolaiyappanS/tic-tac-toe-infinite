@@ -1,11 +1,11 @@
-import GameBoard from "../../components/gameBoard/GameBoard";
 import Header from "../../components/header/Header";
+import HomePage from "../../components/homePage/HomePage";
 
 const MainContainer = () => {
   return (
     <>
       <Header />
-      <GameBoard />
+      <HomePage />
     </>
   );
 };

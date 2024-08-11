@@ -5,3 +5,23 @@ body {
   background-color: #212121;
   color: #fff;
 }
+
+.home_button {
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50vw;
+}
+
+@media (max-width: 420px) {
+  .home_button {
+    left: 4vw;
+    transform: none;
+    width: 83vw;
+  }
+}
+
+@media (min-width: 750px) {
+  .home_button {
+    width: 30vw;
+  }
+}

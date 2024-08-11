@@ -108,7 +108,7 @@ export const refreshBoard = () => {
     setBlockedCell(-1, -1);
   }
   setRefreshBtnOpacity(useGameStore.getState().canRefresh ? "1" : "0.3");
-  setRefreshBtnColor("#fff");
+  setRefreshBtnColor("#0000");
 };
 
 const checkGameWin = () => {
