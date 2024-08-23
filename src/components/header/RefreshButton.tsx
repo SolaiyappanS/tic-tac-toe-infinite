@@ -6,6 +6,7 @@ const RefreshButton = () => {
   const { refreshBtnColor, refreshBtnOpacity } = useGameStore();
   return (
     <button
+      className="refresh_button"
       style={{
         ...RefreshButtonStyles,
         borderColor: refreshBtnColor,

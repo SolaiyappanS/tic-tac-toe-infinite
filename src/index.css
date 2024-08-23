@@ -25,3 +25,23 @@ body {
     width: 30vw;
   }
 }
+
+.refresh_button {
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50vw;
+}
+
+@media (max-width: 750px) {
+  .refresh_button {
+    left: 4vw;
+    transform: none;
+    width: 83vw;
+  }
+}
+
+@media (min-width: 1200px) {
+  .refresh_button {
+    width: 30vw;
+  }
+}

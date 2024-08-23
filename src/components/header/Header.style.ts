@@ -21,8 +21,6 @@ export const RefreshButtonStyles: React.CSSProperties = {
   position: "absolute",
   display: "inline-block",
   top: "20vh",
-  left: "50%",
-  transform: "translateX(-50%)",
   textAlign: "center",
   opacity: "0.3",
   cursor: "pointer",
@@ -30,5 +28,4 @@ export const RefreshButtonStyles: React.CSSProperties = {
   border: "0.5vh solid #0000",
   borderRadius: "1vh",
   padding: "1vh 2vh",
-  width: "75vw",
 };
