@@ -10,46 +10,73 @@ export const newGameCode = (): string => {
   return result;
 };
 
-export const updateData = (key: string, value: any) => {
-  set(ref(db, useGameStore.getState().gameCode + "/" + key), value);
+export const updateData = async (key: string, value: any) => {
+  await set(ref(db, useGameStore.getState().gameCode + "/" + key), value);
 };
 
 export const syncData = () => {
-  onValue(ref(db, useGameStore.getState().gameCode), (res) => {
-    useGameStore.setState({
-      isAvailable: res.val().isAvailable,
-      blockedCell: res.val().blockedCell,
-      isGameWin: res.val().isGameWin,
-      coordinates: res.val().coordinates,
-      canRefresh: res.val().canRefresh,
-      isXTurn: res.val().isXTurn,
-      gameCellColors: res.val().gameCellColors,
-      gameCellTextShadow: res.val().gameCellTextShadow,
-      gameCellValues: res.val().gameCellValues,
-      gameWinCells: res.val().gameWinCells,
-      winColor: res.val().winColor,
-      refreshBtnOpacity: res.val().refreshBtnOpacity,
-      refreshBtnColor: res.val().refreshBtnColor,
-    });
-  });
+  onValue(
+    ref(db, useGameStore.getState().gameCode),
+    (res) => {
+      console.log(res.val());
+      useGameStore.setState({
+        isAvailable: res.val().isAvailable,
+        blockedCell: res.val().blockedCell,
+        isGameWin: res.val().isGameWin,
+        coordinates: res.val().coordinates,
+        canRefresh: res.val().canRefresh,
+        isXTurn: res.val().isXTurn,
+        gameCellColors: res.val().gameCellColors,
+        gameCellTextShadow: res.val().gameCellTextShadow,
+        gameCellValues: res.val().gameCellValues,
+        gameWinCells: res.val().gameWinCells,
+        winColor: res.val().winColor,
+        refreshBtnOpacity: res.val().refreshBtnOpacity,
+        refreshBtnColor: res.val().refreshBtnColor,
+      });
+    },
+    () => {
+      resetData();
+    }
+  );
 };
 
-export const createNewGame = () => {
+export const createNewGame = async () => {
   const gameCode = newGameCode();
   useGameStore.setState({ gameCode: gameCode });
-  set(ref(db, gameCode), {
-    isAvailable: useGameStore.getInitialState().isAvailable,
-    blockedCell: useGameStore.getInitialState().blockedCell,
-    isGameWin: useGameStore.getInitialState().isGameWin,
-    coordinates: useGameStore.getInitialState().coordinates,
-    canRefresh: useGameStore.getInitialState().canRefresh,
-    isXTurn: useGameStore.getInitialState().isXTurn,
-    gameCellColors: useGameStore.getInitialState().gameCellColors,
-    gameCellTextShadow: useGameStore.getInitialState().gameCellTextShadow,
-    gameCellValues: useGameStore.getInitialState().gameCellValues,
-    gameWinCells: useGameStore.getInitialState().gameWinCells,
-    winColor: useGameStore.getInitialState().winColor,
-    refreshBtnOpacity: useGameStore.getInitialState().refreshBtnOpacity,
-    refreshBtnColor: useGameStore.getInitialState().refreshBtnColor,
-  });
+  await resetData();
+  syncData();
+};
+
+export const resetData = async () => {
+  const setIsAvailable_C = useGameStore.getState().setIsAvailable_C;
+  const setBlockedCell_C = useGameStore.getState().setBlockedCell_C;
+  const setIsGameWin = useGameStore.getState().setIsGameWin;
+  const setCoordinates_C = useGameStore.getState().setCoordinates_C;
+  const setCanRefresh = useGameStore.getState().setCanRefresh;
+  const setIsXturn = useGameStore.getState().setIsXturn;
+  const setGameCellColors_C = useGameStore.getState().setGameCellColors_C;
+  const setGameCellTextShadow_C =
+    useGameStore.getState().setGameCellTextShadow_C;
+  const setGameCellValues_C = useGameStore.getState().setGameCellValues_C;
+  const setGameWinCells_C = useGameStore.getState().setGameWinCells_C;
+  const setWinColor = useGameStore.getState().setWinColor;
+  const setRefreshBtnOpacity = useGameStore.getState().setRefreshBtnOpacity;
+  const setRefreshBtnColor = useGameStore.getState().setRefreshBtnColor;
+
+  await setIsAvailable_C(useGameStore.getInitialState().isAvailable);
+  await setBlockedCell_C(useGameStore.getInitialState().blockedCell);
+  await setIsGameWin(useGameStore.getInitialState().isGameWin);
+  await setCoordinates_C(useGameStore.getInitialState().coordinates);
+  await setCanRefresh(useGameStore.getInitialState().canRefresh);
+  await setIsXturn(useGameStore.getInitialState().isXTurn);
+  await setGameCellColors_C(useGameStore.getInitialState().gameCellColors);
+  await setGameCellTextShadow_C(
+    useGameStore.getInitialState().gameCellTextShadow
+  );
+  await setGameCellValues_C(useGameStore.getInitialState().gameCellValues);
+  await setGameWinCells_C(useGameStore.getInitialState().gameWinCells);
+  await setWinColor(useGameStore.getInitialState().winColor);
+  await setRefreshBtnOpacity(useGameStore.getInitialState().refreshBtnOpacity);
+  await setRefreshBtnColor(useGameStore.getInitialState().refreshBtnColor);
 };

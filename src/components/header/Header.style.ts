@@ -30,4 +30,5 @@ export const RefreshButtonStyles: React.CSSProperties = {
   border: "0.5vh solid #0000",
   borderRadius: "1vh",
   padding: "1vh 2vh",
+  width: "75vw",
 };

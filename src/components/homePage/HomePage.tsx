@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { ButtonStyles, InputStyles } from "./HomePage.style";
-import { createNewGame } from "../../services/gameDataService";
+import { createNewGame, syncData } from "../../services/gameDataService";
+import useGameStore from "../../store/gameStore";
 
 const HomePage = () => {
   const [disabled, setDisabled] = useState(true);
   const [draftGameCode, setDraftGameCode] = useState("");
+  const { setGameCode, setIsGameStarted } = useGameStore();
 
   const handleChange = (value: string) => {
     setDraftGameCode(value.toUpperCase());
@@ -15,8 +17,22 @@ const HomePage = () => {
     if (value.toLowerCase() === "enter") joinGame();
   };
 
-  const joinGame = () => {
-    if (!disabled) console.log("joined: " + draftGameCode);
+  const joinGame = async () => {
+    if (!disabled) {
+      setGameCode(draftGameCode);
+      await syncData();
+      setIsGameStarted(true);
+    }
+  };
+
+  const newOnlineGame = async () => {
+    await createNewGame();
+    setIsGameStarted(true);
+  };
+
+  const newOfflineGame = () => {
+    setGameCode("Offline");
+    setIsGameStarted(true);
   };
 
   return (
@@ -24,9 +40,9 @@ const HomePage = () => {
       <div
         className="home_button"
         style={{ ...ButtonStyles, top: "30vh" }}
-        onClick={createNewGame}
+        onClick={newOnlineGame}
       >
-        New Game
+        New Online Game
       </div>
       <input
         type="text"
@@ -50,7 +66,11 @@ const HomePage = () => {
       >
         Join Existing Game
       </div>
-      <div className="home_button" style={{ ...ButtonStyles, top: "52.5vh" }}>
+      <div
+        className="home_button"
+        style={{ ...ButtonStyles, top: "52.5vh" }}
+        onClick={newOfflineGame}
+      >
         Play Offline
       </div>
     </>
