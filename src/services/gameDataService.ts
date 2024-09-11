@@ -18,7 +18,6 @@ export const syncData = () => {
   onValue(
     ref(db, useGameStore.getState().gameCode),
     (res) => {
-      console.log(res.val());
       useGameStore.setState({
         isAvailable: res.val().isAvailable,
         blockedCell: res.val().blockedCell,

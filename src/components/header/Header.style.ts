@@ -29,3 +29,8 @@ export const RefreshButtonStyles: React.CSSProperties = {
   borderRadius: "1vh",
   padding: "1vh 2vh",
 };
+
+export const GameCodeStyles: React.CSSProperties = {
+  ...RefreshButtonStyles,
+  top: "25vh",
+};

@@ -20,8 +20,8 @@ const HomePage = () => {
   const joinGame = async () => {
     if (!disabled) {
       setGameCode(draftGameCode);
-      await syncData();
       setIsGameStarted(true);
+      syncData();
     }
   };
 
